@@ -1,0 +1,105 @@
+﻿@model rad.Models.staffavilability
+
+@{
+
+    Layout = "~/Views/shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="~/Mustang-Modal.Examples/Scripts/jquery-1.11.3.min.js"></script>
+<script src="~/Mustang-Modal.Examples/Scripts/mustang-modal.min.js"></script>
+<link href="~/Mustang-Modal.Examples/Styles/bootstrap.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<link href="~/style.css" rel="stylesheet" />
+<!--<link href="~/Mustang-Modal.Examples/Styles/mustang-modal.css" rel="stylesheet" />-->
+
+
+
+<div class="row "  >
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4" id="start">
+        @using (Html.BeginForm("reservate", "Avilability", FormMethod.Post, new { @area = "Admin", @role = "form" }))
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 style="text-align:center;color:white;">Check Avilability</h1>
+                    </div>
+                </div>
+            <div class="row ">
+                <div class="col-lg-4"><center><label style="margin-bottom:10px;margin-right:10px;">check in</label></center></div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4"><center><label>check out</label></center></div>
+            </div>
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-lg-5"><input type="date" name="checkin" class="form-control col-lg-6" style="margin-top:10px;margin-bottom:10px;" required></div>
+                <div class="col-lg-2"></div>
+                <div class="col-lg-5"><input type="date" class="form-control col-lg-6" name="checkout" style="margin-top:10px;margin-bottom:10px;" required></div>
+            </div>
+            <div class="row ">
+
+                <div class="col-lg-12"><input type="number" class="form-control" placeholder="No of rooms" name="rooms" id="optionsRadios" required></div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12"><input type="number" class="form-control" placeholder="No of adult" name="adults" id="optionsRadios" required></div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12"><input type="number" class="form-control " placeholder="No of clildrens" name="childs" id="optionsRadios" required></div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <button type="submit" class="btn btn-primary col-lg-12" value="submit" style="margin-top:10px; margin-bottom:20px; border-radius:5px!important" >Submit</button>
+                </div>
+            </div>
+           
+                }
+            </div>
+    <div class="col-lg-4"></div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+<script>
+    if ('@ViewBag.avimsg' == 'ok')
+    {
+        MustangModal.prop({
+            body: "All rooms are reserved",
+            title: "Sorry",
+            buttons: [
+{
+    id: "btnClose",                 //Optional field. If id not set, will be added random button idasautomatically.
+    text: "Close",                  //Optional field. Default name is "Button Name".
+    style: "primary",                //Optional field. This field uses bootstrapt button styles. Default style is"default".
+    callback: function () {
+       
+        MustangModal.close();
+    }
+
+}, {
+    id: "btnClose",                 //Optional field. If id not set, will be added random button idasautomatically.
+    text: "Home",                  //Optional field. Default name is "Button Name".
+    style: "primary",                //Optional field. This field uses bootstrapt button styles. Default style is"default".
+    callback: function () {
+
+        window.location= "home/index";
+    }
+}]
+        }).open();
+    }
+  
+    var dt = new Date();
+    var yyyy = dt.getFullYear().toString();
+    var mm = (dt.getMonth() + 1).toString(); // getMonth() is zero-based
+    var dd = dt.getDate().toString();
+    var min = yyyy + '-' + (mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]); // padding
+    $('#dates').prop('min', min);
+
+</script>

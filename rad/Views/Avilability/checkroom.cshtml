@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/shared/_Layout.cshtml";
+}
+
+
+
+@{
+    if (int.Parse(ViewBag.singleroom) > 0)
+    {
+        <div class="row" id="single" onclick="">
+            <div class="col-lg-2"></div>
+
+            <div class="col-lg-8 jumbotron " id="box">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2>Single Rooms</h2>
+                        <img src="~/images/View-pictures-of-the-hotel-online.jpg" alt="Single room" style="float:left;max-height:250px; margin-bottom:10px;margin-left:10px;margin-bottom:10px; margin-top:10px;" />
+                    </div>
+                    <div class="col-lg-6">
+                        <p style="padding:70px;">only  @ViewBag.singleroom Single Rooms are avilable.Sheraton Hotel
+                                            provides very comfertable and inexpensive rooms.</p>
+
+                        @Html.ActionLink("Book Now", "singleroomconfirm", "Avilability", null, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+                    <div class="col-lg-2"></div>
+
+                </div>
+                }
+                }
+
+
+                @{
+                    if (int.Parse(ViewBag.doubleroom) > 0)
+                    {
+                        <div class="row" id="double">
+                            <div class="col-lg-2"></div>
+
+                            <div class="col-lg-8 jumbotron  " id="box">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h2>Double Rooms</h2>
+                                        <img src="  ~/images/266369B900000578-2982438-image-a-1_1425659346909.jpg" alt="double room" style="float:left;max-height:250px; margin-bottom:10px;margin-left:10px;margin-bottom:10px; margin-top:10px;" />
+                                    </div>
+                                    <div class="col-lg-6">
+
+
+
+                                        <p style="padding:70px;">
+                                            only  @ViewBag.doubleroom Double Rooms are avilable.Sheraton Hotel
+                                            provides very comfertable and inexpensive rooms.
+                                        </p>
+                                        @Html.ActionLink("Book Now", "doubleroomconfirm", "Avilability", null, new { @class = "btn btn-primary" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+
+                        </div>
+                    }
+                }

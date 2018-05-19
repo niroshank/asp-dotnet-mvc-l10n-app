@@ -1,0 +1,337 @@
+﻿
+@{
+    //ViewBag.Title = "dashboardother";
+    Layout = "~/Views/shared/_Layout.cshtml";
+    Session["maxrooms"] = 0;
+}
+<link href="~/style.css" rel="stylesheet" />
+
+
+
+@{ int singleroommax = 0; int doubleroommax = 0; }
+<div class="row">
+    <div class="col-lg-3"></div>
+  
+        <div class="col-lg-6"><br>
+<div class="container-fluid ">
+    <div class="well" id="start" style="margin-bottom:20px!important;">
+        <ul class="nav nav-tabs" id="atab">
+            <li  class="active"><a data-toggle="pill" href="#home">Home</a></li>
+            <li><a data-toggle="pill" href="#menu1" >Check Reservations</a></li>
+            <li><a data-toggle="pill" href="#menu2">Cancel Reservations</a></li>
+            <li><a data-toggle="pill" href="#menu3" >Add Reservation</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <center>
+                    <h1 id="header">Check Avilability</h1>
+                </center>
+                @using (Html.BeginForm("staffreservate", "Avilability", FormMethod.Post, new { @area = "Admin", @role = "form", staff = true }))
+                {
+
+
+
+
+                    <div class="row form-inline" id="staffform">
+                        <!--<div class="col-lg-4" ></div>
+                        <div class="col-lg-4">-->
+                        <table align="center">
+                            <tr align="center">
+                                <td>
+                                    <label for="usr">Checkin:</label>
+                                </td>
+                                <td style=" padding: 10px;">
+                                    <div class="form-inline">
+                                        <input type="date" id="staffform" class="form-control" name="checkin" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td style=" padding: 10px;">
+
+                                    <label for="usr">Checkout:</label>
+                                </td>
+                                <td colspan="2">
+                                    <div class="form-inline">
+                                        <input type="date" class="form-control" id="staffform" name="checkout" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <button type="submit" class="btn btn-primary col-lg-12" style="border-radius:5px!important;">Click here to check</button>
+
+                                </td>
+
+                            </tr>
+                        </table>
+
+                    </div>
+                            <!--<div class="row">
+                                <div class="col-lg-4">
+
+                                </div>
+
+                            </div>-->}
+                <div class="row" id="tables">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+
+                        @{if ((ViewBag.singlerooms == null) || (ViewBag.doublerooms) == null) { }
+                            else
+                            {
+                                <table class="table table-inverse">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Room type</th>
+                                            <th>Avilability</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody style="font-size:medium">
+
+                                        <tr>
+                                            @{if (int.Parse(ViewBag.singlerooms) == 0)
+                                                {
+                                                    <td>Single rooms</td> }
+                                                else
+                                                {
+                                                    <td><a data-toggle="pill" id="single" href="#menu3">Single rooms</a></td> } }
+
+                                            <td>@ViewBag.singlerooms</td>
+                                        </tr>
+                                        <tr>
+                                            @{if (int.Parse(ViewBag.doublerooms) == 0)
+                                                {
+                                                    <td>Double rooms</td>}
+                                                else
+                                                {
+                                                    <td><a data-toggle="pill" id="double" href="#menu3">Double rooms</a></td> } }
+
+                                            <td>@ViewBag.doublerooms</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                                }
+                        }
+                        <h1>@ViewBag.test</h1>
+                    </div>
+                    <div class="col-lg-3"></div>
+                </div>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <div class="row">
+                    <center>
+                        <h1>Check Reservations</h1>
+                    </center>
+                </div>
+                @using (Html.BeginForm("staffcheck", "login", FormMethod.Post, new { @area = "Admin", @role = "form" }))
+                {
+                    <div class="row">
+                        <table align="center">
+                            <tr>
+                                <td style=" padding: 10px;">
+                                    <div class="form-inline">
+                                        <label for="identify">Input Customer's Identify Number</label>
+                                        <input type="text" class="form-control" id="identify" name="idno"required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" padding: 10px;">
+                                    <div class="form-inline">
+                                        <button type="submit" class="btn btn-primary col-lg-4" style="border-radius:5px!important;">Click here to check</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                }
+
+
+                <div class=" col-lg-3"></div>
+                <hr />
+                <table  class="table-bordered table-condensed" style="margin-top:20px;margin-bottom:40px;" align="center">
+                 
+                    @{var ids = (List<rad.Models.result>)Session["table"];
+                        Session.Remove("table");
+
+                        if (ids != null)
+                        {
+                            <caption style="font-size:18pt; color:white; text-align:center;">Recevation History</caption>
+                            <tr>
+                                <th>Reservationid</th>
+                                <th>roomid</th>
+                                <th>firstname</th>
+                                <th>lastname</th>
+                                <th>checkin</th>
+                                <th>checkout</th>
+                            </tr>
+                            foreach (rad.Models.result id in ids)
+                            {
+                                <center>
+                                    <tr>
+                                        <td>&nbsp;@id.resrvationid&nbsp;</td>
+                                        <td>&nbsp;@id.roomid&nbsp;</td>
+                                        <td>&nbsp;@id.firstname&nbsp;</td>
+                                        <td>&nbsp;@id.lastname&nbsp;</td>
+                                        <td>&nbsp;@id.checkin&nbsp;</td>
+                                        <td>&nbsp;@id.checkout&nbsp;</td>
+
+                                    </tr>
+                                </center>
+                            }
+
+                        }
+
+                    }
+
+                </table>
+                <div class="row">
+
+                </div>
+            </div>
+
+
+
+
+            <div id="menu2" class="tab-pane fade">
+                <div id="row">
+                    <center><h1>Cancel Reservation</h1></center>
+                    @using (Html.BeginForm("cancelreservation", "avilability", FormMethod.Post, new { @area = "Admin", @role = "form" }))
+                    {
+                        <div class="row">
+
+                            <table align="center">
+                                <tr>
+                                    <td style=" padding: 10px;">
+                                        <div class="form-inline">
+                                            <label for="identify">Enter reservation id</label>
+                                        </div>
+                                    </td>
+                                    <td style=" padding: 10px;">
+                                        <div class="form-inline">
+                                            <input type="number" class="form-control" id="identify" min="0" name="reservationid" required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding: 10px;">
+                                        <div class="form-inline">
+                                            <label for="identity">Identification number</label>
+                                        </div>
+                                    </td>
+                                    <td style=" padding: 10px;">
+                                        <div class="form-inline">
+                                            <input type="text" class="form-control" id="identity" name="Identificationno">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="submit" class="btn btn-primary col-lg-12" style="border-radius:5px!important;">Click here to cancel</button>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>}
+                </div>
+            </div>
+
+
+            <div id="menu3" class="tab-pane fade">
+
+
+
+
+                <div class="row "><center>  <h1>Add Reservation<h1><center></div>
+                @using (Html.BeginForm("addreservation", "Avilability", FormMethod.Post, new { @area = "Admin", @role = "form", staff = true }))
+                {
+                    <div class=" row">
+
+                        <center>
+                            <div class=" form-horizontal" style="width:50%;align-content:center">
+
+
+                                <input id="small" name="firstname" type="text" placeholder="First Name" class="form-control" style="margin-top:10px;margin-bottom:10px;float:right;">
+
+
+
+                                <input id="inputs" name="lastname" type="text" placeholder="Last Name" class="form-control ">
+
+                                <input id="inputs" name="address" type="text" placeholder="Address " class="form-control " required>
+
+
+                                <select class="form-control" id="inputs" name="identificationtype" required style="margin-top:10px;margin-bottom:10px;float:left;">
+                                    <option>Passport no</option>
+                                    <option>NIC no</option>
+                                </select>
+
+
+
+                                <input id="inputs" name="identify" type="text" placeholder="Identification number" class="form-control " required>
+
+                                <input id="inputs" name="telephone" type="text" placeholder="Telephone Number " class="form-control " required>
+                                <input id="inputs" name="email" type="text" placeholder="Email Address " class="form-control " required >
+                                <input id="inputs" name="creditcard" type="text" placeholder="Creditcard no" class="form-control " required>
+
+
+
+
+                                @{ if ((ViewBag.singlerooms) == null) { }
+                                    else
+
+                                    {
+
+                                        singleroommax = int.Parse(ViewBag.singlerooms);
+                                    }
+                                    if ((ViewBag.doublerooms) == null) { }
+                                    else
+
+                                    {
+                                        doubleroommax = int.Parse(ViewBag.doublerooms);
+
+                                    }
+                                }
+
+                                <input id="inputs" name="noofroomssingle" max="@singleroommax" min="0" type="number" placeholder="No of Single Rooms" class="form-control" required>
+
+                                <input id="inputs" name="noofroomsdouble" max="@doubleroommax" min="0" type="number" placeholder=" No of Double Rooms" class="form-control" required>
+                                <input id="inputs" name="username" type="text" value="Username:@Session["UserName"]" disabled="disabled" class="form-control ">
+
+                                <div class="form-inline">
+
+                                    <button type="button" class="btn btn-primary col-lg-5 " id="inputs" style="float:right;margin-bottom:10px;color:white;margin-left :5%;border-radius:5px!important;">cancel</button>
+
+                                    <button type="submit" class="btn btn-primary col-lg-5 " id="inputs" style="float:left;margin-bottom:10px;color:white;margin-right :5%; border-radius:5px!important;">submit</button>
+
+                                </div>
+                            </div>
+                        </center>
+                    </div>}
+            </div>
+
+        </div>
+    </div>
+</div></div>
+   
+    <div class="col-lg-3"></div>
+</div>
+
+    <script>
+        if (('@ViewBag.checkreservation' == "sorry you are entered wrong details") || ('@ViewBag.errordelete' == "Sorry Your entered details are not valid") || ('@ViewBag. delete' == "Reservation Deleted sucessfully ") || ('@ViewBag.reservationnotadd' == "Reservation Adding Failed ") || ('@ViewBag.reservationadd' == "Reservation Added Successfully")) {
+
+            MustangModal.prop({ body: ('@ViewBag.checkreservation' + '@ViewBag.errordelete' + '@ViewBag.reservationnotadd' + '@ViewBag.reservationadd') }).open();
+        }
+    </script>
+
+ <!--allowAutoClose: 2000-->
+
+
+

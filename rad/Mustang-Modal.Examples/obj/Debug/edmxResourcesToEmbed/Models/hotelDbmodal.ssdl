@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="hotelmanagemantentities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'hotelmanagemantsystem.dbo.userlogin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="userlogin">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="username" />
+      <PropertyRef Name="password" />
+      <PropertyRef Name="accesstype" />
+      <PropertyRef Name="activation" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar(max)" Nullable="false" />
+    <Property Name="password" Type="varchar(max)" Nullable="false" />
+    <Property Name="accesstype" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="activation" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="hotelmanagemantentitiesStoreContainer">
+    <EntitySet Name="userlogin" EntityType="Self.userlogin" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [userlogin].[id] AS [id], 
+    [userlogin].[username] AS [username], 
+    [userlogin].[password] AS [password], 
+    [userlogin].[accesstype] AS [accesstype], 
+    [userlogin].[activation] AS [activation]
+    FROM [dbo].[userlogin] AS [userlogin]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

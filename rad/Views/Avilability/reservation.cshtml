@@ -1,0 +1,65 @@
+﻿
+@{
+    // ViewBag.Title = "reservation";
+    Layout = "~/Views/shared/_Layout.cshtml";
+}
+
+
+<link href="~/style.css" rel="stylesheet" />
+
+
+@using (Html.BeginForm("res", "Avilability", FormMethod.Post, new { @area = "Admin", @role = "form" }))
+{
+   
+    <div class="col-lg-4"></div>
+
+    <div class="col-lg-4">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-8" id="start">
+            <div class=" row">
+                <h1 style="text-align:center ;color:white ">Reservation</h1>
+            </div>
+            <div class="col-lg-6">
+
+                <input id="small" name="firstname" type="text" placeholder="first Name" class="form-control" style="margin-top:10px;margin-bottom:10px;float:left;">
+
+            </div>
+            <div class="col-lg-6">
+                <input id="inputs" name="lastname" type="text" placeholder="last Name" class="form-control ">
+            </div>
+            <input id="inputs" name="address" type="text" placeholder="Address " class="form-control " required>
+            <div class="col-lg-6">
+
+                <select class="form-control" id="inputs" name="identificationtype" required style="margin-top:10px;margin-bottom:10px;float:left;">
+                    <option>Passport no</option>
+                    <option>NIC no</option>
+                </select>
+
+            </div>@{int max = int.Parse(ViewBag.max); }
+            <div class="col-lg-6">
+                <input id="inputs" name="identify" type="text" placeholder="Identification number" class="form-control " required>
+            </div>
+            <input id="inputs" name="telephone" type="text" placeholder="Telephone Number " class="form-control" required>
+            <input id="inputs" name="email " type="text" placeholder="Email Address " class="form-control " required>
+            <input id="inputs" name="creditcard" type="text" placeholder="Creditcard no" class="form-control " required>
+            <input id="inputs" name="noofrooms" type="number" max="@max" min="1" placeholder=" Number of rooms" class="form-control" required>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <button type="button" class="btn btn-primary col-lg-4" id="inputs" style="border-radius:5px; float:left;margin-bottom:10px;color:white;">cancel</button>
+                <div class="col-lg-2"></div>
+                <button type="submit" class="btn btn-primary col-lg-4" id="inputs" style="border-radius:5px; float:left;margin-bottom:10px;color:white;">submit</button>
+
+                <div class="col-lg-1"></div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="col-lg-1"></div>
+
+    <div class="col-lg-4"></div>
+
+                }

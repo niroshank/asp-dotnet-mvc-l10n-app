@@ -1,0 +1,49 @@
+﻿
+@{
+
+    Layout = "~/Views/shared/_Layout.cshtml";
+}
+
+<link href="~/style.css" rel="stylesheet" />
+
+<div class="col-lg-4"></div>
+<div class="col-lg-4"  style="background-color:black; margin-bottom:30px;border-radius:7px;">
+
+    <table class="table-bordered table-condensed" style="margin-bottom:40px;color:white;" align="center">
+        @{var ids = (List<rad.Models.home.feedbacks>)Session["feedback"];
+            Session.Remove("feedback");
+
+
+            if (ids != null)
+            {
+
+
+                <caption style="font-size:18pt; color:white; text-align:center;">Messages</caption>
+                <tr>
+                    <th>Feedbackid</th>
+                    <th>Email address</th>
+                    <th>Message</th>
+
+                </tr>
+                foreach (rad.Models.home.feedbacks id in ids)
+                {
+          
+                    
+                   
+                        
+                 
+                    <tr>
+                        <td>&nbsp;@id.feedbackid&nbsp;</td>
+                        <td>&nbsp;@id.email &nbsp;</td>
+                        <td>&nbsp;@id.message&nbsp;</td>
+                    </tr>
+
+                }
+
+            }
+        }
+    </table> 
+</div>
+<div class="col-lg-4"></div>
+
+

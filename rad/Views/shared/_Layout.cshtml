@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <!--link rel="stylesheet" href="~/css/demo.css">-->
+    <link rel="stylesheet" href="~/css/footer-distributed-with-contact-form.css">
+
+    <link href="~/Mustang-Modal.Examples/Styles/mustang-modal.css" rel="stylesheet" />
+    <link href="~/Mustang-Modal.Examples/Styles/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Mustang-Modal.Examples/Scripts/mustang-modal.min.js"></script>
+    <script src="~/Mustang-Modal.Examples/Scripts/jquery-1.11.3.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/style.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="~/style.css" rel="stylesheet" />
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+</head>
+<body>
+    
+        <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+           
+            <div class="container-fluid">
+                <div class="navbar-header" style="width:250px!important;">
+                 
+                    <a class="navbar-brand" href="/about" style="padding:5px!important"><img src="~/images/200px-Sheraton_Hotels.svg.png" style="width:55px;height:45px;margin:2px; "></a>
+                    <p style="padding:18px!important;margin:0px!important;color:#635e5e;letter-spacing: 3px;font-size:15pt;text-align: center;">Sheraton Hotel</p>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse navbar-menubuilder" id=" head">
+                    <ul class="nav navbar-nav navbar-right" >
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/home/image_Gallery">Image Gallery</a>
+                        </li>
+                        <li>
+                            <a href="/Avilability">Book Now</a>
+                        </li>
+                     
+                        @{
+                            if (Session["username"] == null)
+                            {
+                                <li id=" login"><a href="#" id="login">Login</a></li>
+
+                            }
+                            else
+                            {
+                        <li><a href="~/login/dashboardother" id="login">Dashboard</a></li>
+                        <li>
+                            <a href="/home/messageviews">Messages</a>
+                        </li>
+                       
+                                <li ><a><span class="glyphicon glyphicon-user"></span> @Session["username"]</a></li>
+                             //   <li>@Ajax.ActionLink("Logout", "Index", "logouts", null, new { @class = "" })</li>
+                                <li id=" login"><a href="~/logouts/Index" id="login">Logout</a></li>
+                            }
+                        }
+                       
+                        
+                       
+                    </ul>
+                    <script>
+                        $('#login').click(function () { MustangModal.prop({ body: "Hello world.", title: "Sheraton Hotel User Login", width: 600 }).open($('#logintable')); })
+                  
+                    </script>
+
+                </div>
+         
+            
+</div>
+            </div>
+            @RenderBody()
+      
+    <div style="display:none; border-radius="7px;" id="logintable" >
+            <img  src="~/images/logo_login.jpg" style ="width:270px;height:270px;">
+            <form style="float:right!important;margin:20px!important;" action="/login/dashboard" area="Admin" method="post" role="form">
+                <!--<div class="form-group">-->
+                <table>
+                    <tr><td style="color:red;">@ViewBag.loginerror </td> </tr>
+                    <tr>
+                        <td style="padding: 10px; "><input type="text" name="username" class="form-control" id="Inputusername" placeholder="Enter username" required=""></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; "><input type="password" name="password" class="form-control" id="InputPassword" placeholder="Password" required=""></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; "><input class="form-check-input" type="checkbox"> Remember me </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; "><button type="submit" class="btn btn-primary" id="submit" style="float:left!important;border-radius:5px!important;"> Sign in </button></td>
+                    </tr>
+                </table>
+                <!--</div>-->
+            </form>
+     
+    </div>
+
+
+    <footer class="footer-distributed">
+        <div class="footer-left">
+            <h3><img src="~/images/logo.png" /></h3>
+            <p class="footer-links">
+                <ul style="color:white;margin-top:10px;">
+                    <li>Telephone : 0094 11 2711711</li>
+                    <li>Address   :Hotel Sheraton, Mount Lavinia Colombo.</li>
+
+
+                </ul>
+            </p>
+            <p class="footer-company-name" >Sheraton Hotel Media &copy; 2016</p>
+           
+        </div>
+        <div class="footer-right">
+            <p>Contact Us</p>
+
+            <form action="~/home/feedback" method="post">
+                <input type="email" style="height:30px!important;border-radius:5px!important;"" class="form-control" name="email" placeholder="Email"  required />
+                <textarea name="message" style="border-radius:5px!important;" class="form-control" placeholder="Message" required></textarea>
+                <button type="submit" style="border-radius:5px!important;" class="btn btn-primary">Send</button>
+               
+            </form>
+        </div>
+    </footer>
+    <script>
+        if
+            (('@ViewBag.message' == "Sorry Your message is not sent") || ('@ViewBag.message' == "Your message is Successfully sent")) {
+
+            MustangModal.prop({ body: ('@ViewBag.message'), allowAutoClose: 2000 }).open();
+        }
+           
+    </script>
+    @{   ViewBag.loginerror = Session["loginerror"];
+        Session.Remove("loginerror");
+        }
+
+    <script>
+        if ('  @ViewBag.loginerror' == "invalid username or password") {
+            $('#login').click(function () { MustangModal.prop({ body: "Hello world.", title: "Sheraton Hotel User Login", width: 600 }).open($('#logintable')); })
+        }</script>
+</body>
+</html>
